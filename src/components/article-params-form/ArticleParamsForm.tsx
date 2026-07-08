@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 import {
 	ArticleStateType,
+	OptionType,
 	backgroundColors,
 	contentWidthArr,
 	defaultArticleState,
@@ -55,6 +56,15 @@ export const ArticleParamsForm = ({
 		onReset();
 	};
 
+	const updateFormField = (field: keyof ArticleStateType) => {
+		return (value: OptionType) => {
+			setFormState((prev) => ({
+				...prev,
+				[field]: value,
+			}));
+		};
+	};
+
 	return (
 		<div ref={rootRef}>
 			<ArrowButton isOpen={isSidebarOpen} onClick={handleToggleSidebar} />
@@ -74,43 +84,33 @@ export const ArticleParamsForm = ({
 							title='Шрифт'
 							selected={formState.fontFamilyOption}
 							options={fontFamilyOptions}
-							onChange={(fontFamilyOption) =>
-								setFormState((state) => ({ ...state, fontFamilyOption }))
-							}
+							onChange={updateFormField('fontFamilyOption')}
 						/>
 						<RadioGroup
 							title='Размер шрифта'
 							name='font-size'
 							selected={formState.fontSizeOption}
 							options={fontSizeOptions}
-							onChange={(fontSizeOption) =>
-								setFormState((state) => ({ ...state, fontSizeOption }))
-							}
+							onChange={updateFormField('fontSizeOption')}
 						/>
 						<Select
 							title='Цвет шрифта'
 							selected={formState.fontColor}
 							options={fontColors}
-							onChange={(fontColor) =>
-								setFormState((state) => ({ ...state, fontColor }))
-							}
+							onChange={updateFormField('fontColor')}
 						/>
 						<Separator />
 						<Select
 							title='Цвет фона'
 							selected={formState.backgroundColor}
 							options={backgroundColors}
-							onChange={(backgroundColor) =>
-								setFormState((state) => ({ ...state, backgroundColor }))
-							}
+							onChange={updateFormField('backgroundColor')}
 						/>
 						<Select
 							title='Ширина контента'
 							selected={formState.contentWidth}
 							options={contentWidthArr}
-							onChange={(contentWidth) =>
-								setFormState((state) => ({ ...state, contentWidth }))
-							}
+							onChange={updateFormField('contentWidth')}
 						/>
 					</div>
 					<div className={styles.bottomContainer}>
