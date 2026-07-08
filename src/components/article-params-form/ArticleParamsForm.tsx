@@ -15,6 +15,7 @@ import { Button } from 'src/ui/button';
 import { RadioGroup } from 'src/ui/radio-group';
 import { Select } from 'src/ui/select';
 import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
+import { Separator } from 'src/ui/separator';
 import { Text } from 'src/ui/text';
 
 import styles from './ArticleParamsForm.module.scss';
@@ -94,6 +95,7 @@ export const ArticleParamsForm = ({
 								setFormState((state) => ({ ...state, fontColor }))
 							}
 						/>
+						<Separator />
 						<Select
 							title='Цвет фона'
 							selected={formState.backgroundColor}
